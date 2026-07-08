@@ -82,5 +82,11 @@ CORS_ALLOWED_HEADERS = [
     'x-requested-with',
 ]
 
+# Disable CSRF for API endpoints temporarily
+CSRF_TRUSTED_ORIGINS = [
+    'https://tmss-eight.vercel.app',
+    'https://tmss-one.vercel.app',
+]
+
 # ── Email ─────────────────────────────────────────────────────────────────────
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
