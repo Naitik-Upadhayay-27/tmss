@@ -24,7 +24,6 @@ if DATABASE_URL:
     # Add Neon-specific options
     parsed_db['OPTIONS'] = {
         'connect_timeout': 10,
-        'options': '-c search_path=identity,core,ai,audit,system,public',
         'sslmode': 'require',  # Neon requires SSL
     }
     DATABASES = {'default': parsed_db}
@@ -40,7 +39,6 @@ else:
             'PORT':     config('DB_PORT',     default='5432'),
             'OPTIONS': {
                 'connect_timeout': 10,
-                'options': '-c search_path=identity,core,ai,audit,system,public',
                 'sslmode': 'require' if config('DB_SSL', default=True, cast=bool) else 'prefer',
             },
         }
