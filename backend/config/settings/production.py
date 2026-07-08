@@ -7,11 +7,7 @@ from decouple import config
 
 DEBUG = config('DEBUG', default=False, cast=bool)
 
-ALLOWED_HOSTS = config(
-    'ALLOWED_HOSTS',
-    default='*',
-    cast=lambda v: [s.strip() for s in v.split(',')],
-)
+ALLOWED_HOSTS = ['*']  # Temporarily allow all hosts for debugging
 
 # ── Database — reads DATABASE_URL env var set by Render/Neon/Supabase ─────────
 DATABASE_URL = config('DATABASE_URL', default='')
@@ -61,13 +57,8 @@ SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 # CSRF_COOKIE_SECURE = True
 
 # ── CORS — allow your Vercel frontend ─────────────────────────────────────────
-CORS_ALLOWED_ORIGINS = config(
-    'CORS_ALLOWED_ORIGINS',
-    default='https://tmss-one.vercel.app',
-    cast=lambda v: [s.strip() for s in v.split(',') if s.strip()],
-)
+CORS_ALLOW_ALL_ORIGINS = True  # Temporarily allow all origins
 CORS_ALLOW_CREDENTIALS = True
-CORS_ALLOW_ALL_ORIGINS = config('CORS_ALLOW_ALL_ORIGINS', default=False, cast=bool)
 
 # Additional CORS settings for better compatibility
 CORS_ALLOWED_HEADERS = [
