@@ -1,0 +1,73 @@
+# ── Python ────────────────────────────────────────────────────────────────────
+__pycache__/
+*.py[cod]
+*$py.class
+*.pyo
+*.pyd
+*.pdb
+*.so
+
+# ── Virtual environments ───────────────────────────────────────────────────────
+venv/
+.venv/
+env/
+ENV/
+.env/
+
+# ── Django ─────────────────────────────────────────────────────────────────────
+*.log
+local_settings.py
+db.sqlite3
+db.sqlite3-journal
+media/
+staticfiles/
+/static/
+
+# ── Environment / secrets ──────────────────────────────────────────────────────
+.env
+.env.*
+!.env.example
+
+# ── Distribution / packaging ──────────────────────────────────────────────────
+dist/
+build/
+*.egg-info/
+*.egg
+.eggs/
+pip-wheel-metadata/
+MANIFEST
+
+# ── Testing ───────────────────────────────────────────────────────────────────
+.pytest_cache/
+.coverage
+coverage.xml
+htmlcov/
+.tox/
+nosetests.xml
+
+# ── Type checking ─────────────────────────────────────────────────────────────
+.mypy_cache/
+.dmypy.json
+.pytype/
+
+# ── IDE / OS ──────────────────────────────────────────────────────────────────
+.DS_Store
+.DS_Store?
+._*
+Thumbs.db
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# ── Docker ────────────────────────────────────────────────────────────────────
+# Keep Dockerfile.disabled so Render doesn't try to use Docker
+# Dockerfile          ← intentionally NOT ignored (may be needed)
+
+# ── Celery ────────────────────────────────────────────────────────────────────
+celerybeat-schedule
+celerybeat.pid
+
+# ── Render ────────────────────────────────────────────────────────────────────
+.render/

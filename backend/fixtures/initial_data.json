@@ -1,0 +1,8 @@
+[
+  {"model": "departments.department", "pk": 1, "fields": {"code": "INS_OPS",  "name": "Insurance Operations",    "head": null, "sla_critical_hours": 4,  "sla_high_hours": 24}},
+  {"model": "departments.department", "pk": 2, "fields": {"code": "LOAN_OPS", "name": "Loan Operations",          "head": null, "sla_critical_hours": 4,  "sla_high_hours": 24}},
+  {"model": "departments.department", "pk": 3, "fields": {"code": "TECH_BE",  "name": "Technology — Backend",    "head": null, "sla_critical_hours": 2,  "sla_high_hours": 8}},
+  {"model": "departments.department", "pk": 4, "fields": {"code": "TECH_FE",  "name": "Technology — Frontend",   "head": null, "sla_critical_hours": 2,  "sla_high_hours": 8}},
+  {"model": "departments.department", "pk": 5, "fields": {"code": "OPS",      "name": "Operations",               "head": null, "sla_critical_hours": 4,  "sla_high_hours": 24}},
+  {"model": "departments.department", "pk": 6, "fields": {"code": "COMP",     "name": "Compliance",               "head": null, "sla_critical_hours": 8,  "sla_high_hours": 48}}
+]

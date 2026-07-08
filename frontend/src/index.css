@@ -1,0 +1,89 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,300..800;1,14..32,300..800&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --sidebar-width: 240px;
+    --sidebar-collapsed: 60px;
+    --topbar-height: 56px;
+  }
+
+  html {
+    font-family: 'Inter', system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
+    color: #0F1120;
+    background-color: #F8F9FB;
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+
+  :focus-visible {
+    outline: 2px solid #3D1A8E;
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
+
+  /* Smooth scrolling */
+  html { scroll-behavior: smooth; }
+
+  /* Selection */
+  ::selection {
+    background: #EDE8FA;
+    color: #2A1166;
+  }
+}
+
+@layer utilities {
+  /* Scrollbar — subtle */
+  .scrollbar-thin {
+    scrollbar-width: thin;
+    scrollbar-color: #C8CEDA transparent;
+  }
+  .scrollbar-thin::-webkit-scrollbar { width: 5px; height: 5px; }
+  .scrollbar-thin::-webkit-scrollbar-track { background: transparent; }
+  .scrollbar-thin::-webkit-scrollbar-thumb {
+    background: #C8CEDA;
+    border-radius: 99px;
+  }
+  .scrollbar-thin::-webkit-scrollbar-thumb:hover { background: #8B92A9; }
+
+  /* Tabular numbers for data */
+  .tabular { font-variant-numeric: tabular-nums; }
+
+  /* Truncate multi-line */
+  .line-clamp-2 {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  /* Glass effect */
+  .glass {
+    background: rgba(255,255,255,0.7);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+  }
+}
+
+@layer components {
+  /* Prose overrides for ticket descriptions */
+  .prose-ticket {
+    @apply text-sm text-text-secondary leading-relaxed;
+  }
+  .prose-ticket p { @apply mb-2; }
+  .prose-ticket p:last-child { @apply mb-0; }
+  .prose-ticket code {
+    @apply text-xs font-mono bg-surface-tertiary text-brand-purple px-1.5 py-0.5 rounded;
+  }
+  .prose-ticket ul { @apply list-disc pl-5 space-y-1; }
+  .prose-ticket ol { @apply list-decimal pl-5 space-y-1; }
+  .prose-ticket strong { @apply font-semibold text-text-primary; }
+}

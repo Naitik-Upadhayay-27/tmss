@@ -1,0 +1,78 @@
+# FatakPay TMS Backend — Docker Build Exclusions
+
+# Git
+.git
+.gitignore
+
+# Python
+__pycache__
+*.pyc
+*.pyo
+*.pyd
+.Python
+env
+pip-log.txt
+pip-delete-this-directory.txt
+.tox
+.coverage
+.coverage.*
+.pytest_cache
+
+# Django
+*.log
+local_settings.py
+db.sqlite3
+db.sqlite3-journal
+
+# Environment variables
+.env
+.env.*
+!.env.example
+!.env.production.example
+
+# IDE
+.vscode
+.idea
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Node (if any frontend build files exist)
+node_modules
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Documentation
+README.md
+CHANGELOG.md
+docs/
+
+# Development files
+manage.py.bak
+*.bak
+.pytest_cache
+.coverage
+
+# Static and media files (built in container)
+staticfiles/
+media/
+
+# Local development
+*.local
+.env.local
+docker-compose.override.yml
+
+# Kubernetes files
+k8s-*.yaml
+*.sh
+*.md
