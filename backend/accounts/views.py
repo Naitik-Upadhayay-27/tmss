@@ -40,6 +40,24 @@ class AuthViewSet(viewsets.ViewSet):
         """Simple test endpoint to verify connectivity"""
         return Response({'message': 'Backend connection successful', 'timestamp': '2026-06-30T13:45:00Z'})
 
+    @action(detail=False, methods=['post'], url_path='test-login')
+    def test_login(self, request):
+        """Debug endpoint to see what data we're receiving"""
+        print(f"=== DEBUG LOGIN TEST ===")
+        print(f"Request method: {request.method}")
+        print(f"Content-Type: {request.content_type}")
+        print(f"Raw data: {request.body}")
+        print(f"Parsed data: {request.data}")
+        print(f"POST: {request.POST}")
+        print(f"Headers: {dict(request.headers)}")
+        
+        return Response({
+            'method': request.method,
+            'content_type': request.content_type,
+            'data': request.data,
+            'body_size': len(request.body),
+        })
+
     @action(detail=False, methods=['post'], url_path='login')
     def login(self, request):
         print(f"Login attempt - Data: {request.data}")
