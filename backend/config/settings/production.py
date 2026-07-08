@@ -16,13 +16,18 @@ ALLOWED_HOSTS = config(
 # ── Database — reads DATABASE_URL env var set by Render/Neon/Supabase ─────────
 DATABASE_URL = config('DATABASE_URL', default='')
 if DATABASE_URL:
-    DATABASES = {
-        'default': dj_database_url.parse(
-            DATABASE_URL,
-            conn_max_age=600,
-            conn_health_checks=True,
-        )
+    parsed_db = dj_database_url.parse(
+        DATABASE_URL,
+        conn_max_age=600,
+        conn_health_checks=True,
+    )
+    # Add Neon-specific options
+    parsed_db['OPTIONS'] = {
+        'connect_timeout': 10,
+        'options': '-c search_path=identity,core,ai,audit,system,public',
+        'sslmode': 'require',  # Neon requires SSL
     }
+    DATABASES = {'default': parsed_db}
 else:
     # PostgreSQL fallback when no DATABASE_URL is set
     DATABASES = {
@@ -35,7 +40,8 @@ else:
             'PORT':     config('DB_PORT',     default='5432'),
             'OPTIONS': {
                 'connect_timeout': 10,
-                'options': '-c search_path=identity,core,ai,audit,public',
+                'options': '-c search_path=identity,core,ai,audit,system,public',
+                'sslmode': 'require' if config('DB_SSL', default=True, cast=bool) else 'prefer',
             },
         }
     }
@@ -50,18 +56,33 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 # ── Security headers ───────────────────────────────────────────────────────────
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
-SECURE_HSTS_SECONDS = 31536000
-SECURE_HSTS_INCLUDE_SUBDOMAINS = True
-SESSION_COOKIE_SECURE = True
-CSRF_COOKIE_SECURE = True
+# Temporarily disable strict security for debugging
+# SECURE_HSTS_SECONDS = 31536000
+# SECURE_HSTS_INCLUDE_SUBDOMAINS = True
+# SESSION_COOKIE_SECURE = True
+# CSRF_COOKIE_SECURE = True
 
 # ── CORS — allow your Vercel frontend ─────────────────────────────────────────
 CORS_ALLOWED_ORIGINS = config(
     'CORS_ALLOWED_ORIGINS',
-    default='',
+    default='https://tmss-one.vercel.app',
     cast=lambda v: [s.strip() for s in v.split(',') if s.strip()],
 )
 CORS_ALLOW_CREDENTIALS = True
+CORS_ALLOW_ALL_ORIGINS = config('CORS_ALLOW_ALL_ORIGINS', default=False, cast=bool)
+
+# Additional CORS settings for better compatibility
+CORS_ALLOWED_HEADERS = [
+    'accept',
+    'accept-encoding',
+    'authorization',
+    'content-type',
+    'dnt',
+    'origin',
+    'user-agent',
+    'x-csrftoken',
+    'x-requested-with',
+]
 
 # ── Email ─────────────────────────────────────────────────────────────────────
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
